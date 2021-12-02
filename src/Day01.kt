@@ -1,17 +1,31 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    fun part1(input: List<Int>): Int {
+        var count = 0
+        var last = Int.MAX_VALUE
+        for (n in input) {
+            if (n > last) {
+                count++
+            }
+            last = n
+        }
+        return count
     }
 
-    fun part2(input: List<String>): Int {
-        return input.size
+    fun part2(input: List<Int>): Int {
+        var count = 0
+        var idx = 0
+        while (idx < input.size - 3) {
+            val sum1 = input.slice(idx..idx + 2).sum()
+            val sum2 = input.slice(idx + 1..idx + 3).sum()
+            if (sum2 > sum1) {
+                count++
+            }
+            idx++
+        }
+        return count
     }
 
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
+    val input = readNums("Day01")
     println(part1(input))
     println(part2(input))
 }
